@@ -166,6 +166,49 @@ header {
     margin-top: 1rem;
 }
 
+/* Work Section */
+.work-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 700px;
+}
+
+.work-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all 0.2s ease;
+}
+
+.work-link:hover {
+    background-color: var(--color-bg-alt);
+    border-color: var(--color-accent);
+    transform: translateX(4px);
+}
+
+.work-link-title {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--color-text);
+}
+
+.work-link-format {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--color-bg-alt);
+    border-radius: 3px;
+}
+
 /* Contact Section */
 .contact-email {
     margin-top: 1.5rem;

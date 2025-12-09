@@ -23,8 +23,23 @@ export default {
       });
     }
     
-    // Check if this is a static asset request (images, etc.)
-    const staticExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.ico', '.pdf'];
+    // Serve favicon.ico - serve the SVG favicon instead
+    if (url.pathname === '/favicon.ico') {
+      if (env.ASSETS) {
+        // Serve the SVG favicon when favicon.ico is requested
+        try {
+          const faviconRequest = new Request(new URL('/favicon.svg', request.url));
+          return await env.ASSETS.fetch(faviconRequest);
+        } catch (e) {
+          // If SVG not found, return 204 No Content (standard for missing favicon)
+          return new Response(null, { status: 204 });
+        }
+      }
+      return new Response(null, { status: 204 });
+    }
+    
+    // Check if this is a static asset request (images, documents, etc.)
+    const staticExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.ico', '.pdf', '.txt'];
     const isStaticAsset = staticExtensions.some(ext => url.pathname.toLowerCase().endsWith(ext));
     
     if (isStaticAsset && env.ASSETS) {
@@ -45,6 +60,8 @@ const HTML = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michaela - Comedian & Comedy Writer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -54,6 +71,7 @@ const HTML = `<!DOCTYPE html>
                 <h1 class="logo">It's Michaela</h1>
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
+                    <li><a href="#work">Work</a></li>
                     <li><a href="#shows">Shows</a></li>
                     <li><a href="#writing">Writing</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -81,7 +99,23 @@ const HTML = `<!DOCTYPE html>
             </div>
         </section>
 
-        <section id="shows" class="section section-alt">
+        <section id="work" class="section section-alt">
+            <div class="container">
+                <h2>Work</h2>
+                <div class="work-links">
+                    <a href="/work/script1.txt" class="work-link" target="_blank" rel="noopener noreferrer">
+                        <span class="work-link-title">Script 1</span>
+                        <span class="work-link-format">TXT</span>
+                    </a>
+                    <a href="/work/blue-lights-ep-1-buff-revisions-15.06.22.pdf" class="work-link" target="_blank" rel="noopener noreferrer">
+                        <span class="work-link-title">Blue Lights EP 1 - Buff Revisions</span>
+                        <span class="work-link-format">PDF</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="shows" class="section">
             <div class="container">
                 <h2>Live Shows</h2>
                 <p>Check back soon for upcoming performances and comedy shows.</p>
