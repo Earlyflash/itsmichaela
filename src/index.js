@@ -1,5 +1,10 @@
 // Cloudflare Worker to serve the website
 import { CSS } from './style.css.js';
+import { aboutContent } from './content/about.js';
+import { workContent } from './content/work.js';
+import { showsContent } from './content/shows.js';
+import { writingContent } from './content/writing.js';
+import { contactContent } from './content/contact.js';
 
 export default {
   async fetch(request, env) {
@@ -97,48 +102,31 @@ const HTML = `<!DOCTYPE html>
 
         <section id="about" class="section">
             <div class="container">
-                <h2>About</h2>
-                <p>Michaela is a comedian and comedy writer known for her sharp wit and unique perspective on everyday life. With a background in [your background], she brings fresh humor to the stage and page.</p>
+${aboutContent}
             </div>
         </section>
 
         <section id="work" class="section section-alt">
             <div class="container">
-                <h2>Work</h2>
-                <div class="work-links">
-                    <a href="/work/script1.txt" class="work-link" target="_blank" rel="noopener noreferrer">
-                        <span class="work-link-title">Script 1</span>
-                        <span class="work-link-format">TXT</span>
-                    </a>
-                    <a href="/work/blue-lights-ep-1-buff-revisions-15.06.22.pdf" class="work-link" target="_blank" rel="noopener noreferrer">
-                        <span class="work-link-title">Blue Lights EP 1 - Buff Revisions</span>
-                        <span class="work-link-format">PDF</span>
-                    </a>
-                </div>
+${workContent}
             </div>
         </section>
 
-        <section id="shows" class="section">
+        <section id="shows" class="section section-alt">
             <div class="container">
-                <h2>Live Shows</h2>
-                <p>Check back soon for upcoming performances and comedy shows.</p>
-                <!-- Add upcoming shows here -->
+${showsContent}
             </div>
         </section>
 
         <section id="writing" class="section">
             <div class="container">
-                <h2>Writing</h2>
-                <p>Michaela's comedy writing has been featured in various publications and projects. Her work combines observational humor with clever wordplay.</p>
-                <!-- Add writing credits/portfolio here -->
+${writingContent}
             </div>
         </section>
 
         <section id="contact" class="section section-alt">
             <div class="container">
-                <h2>Contact</h2>
-                <p>For bookings, collaborations, or just to say hello:</p>
-                <p class="contact-email">Email: <a href="mailto:hello@itsmichaela.com">hello@itsmichaela.com</a></p>
+${contactContent}
             </div>
         </section>
     </main>
