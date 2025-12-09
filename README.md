@@ -33,6 +33,13 @@ The site is configured in `wrangler.toml` with routes for both `itsmichaela.com`
   - Writing
   - Contact
 
+## Static Assets
+
+Static files (like images) should be placed in the `public/` directory. For example:
+- `public/headshot.jpg` will be served at `/headshot.jpg`
+
+Workers Sites automatically serves files from the `public/` directory.
+
 ## Customization
 
-Edit `src/index.js` to customize the HTML content and styling. The CSS is embedded in the worker for simplicity, but can be extracted to a separate file if needed.
+Edit `src/index.js` to customize the HTML content. Edit `src/style.css` to customize the styling.

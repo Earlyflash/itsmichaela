@@ -7,3 +7,6 @@ routes = [
   { pattern = "www.itsmichaela.com/*", zone_name = "itsmichaela.com" }
 ]
 
+[site]
+bucket = "./public"
+

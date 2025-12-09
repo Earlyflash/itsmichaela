@@ -23,16 +23,9 @@ export default {
       });
     }
     
-    // Serve headshot placeholder image
-    if (url.pathname === '/headshot.jpg') {
-      return new Response(HEADSHOT_PLACEHOLDER, {
-        headers: {
-          'Content-Type': 'image/svg+xml',
-        },
-      });
-    }
-    
-    // 404 for other paths
+    // For static assets like headshot.jpg, Workers Sites will serve them from public/
+    // If the file doesn't exist, it will return 404 automatically
+    // We don't need to handle it here - Workers Sites handles it
     return new Response('Not Found', { status: 404 });
   },
 };
