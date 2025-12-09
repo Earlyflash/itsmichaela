@@ -1,0 +1,17 @@
+{
+  "name": "itsmichaela",
+  "version": "1.0.0",
+  "description": "Website for comedian and comedy writer Michaela",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
+
