@@ -21,10 +21,13 @@ export default {
       });
     }
     
-    // Serve headshot image (if it exists, otherwise 404 will trigger placeholder)
+    // Serve headshot placeholder image
     if (url.pathname === '/headshot.jpg') {
-      // Return 404 to trigger placeholder - replace this with actual image serving when image is added
-      return new Response('Not Found', { status: 404 });
+      return new Response(HEADSHOT_PLACEHOLDER, {
+        headers: {
+          'Content-Type': 'image/svg+xml',
+        },
+      });
     }
     
     // 404 for other paths
@@ -44,7 +47,7 @@ const HTML = `<!DOCTYPE html>
     <header>
         <nav>
             <div class="nav-container">
-                <h1 class="logo">Michaela</h1>
+                <h1 class="logo">It's Michaela</h1>
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#shows">Shows</a></li>
@@ -349,4 +352,16 @@ footer p {
         font-size: 1.75rem;
     }
 }`;
+
+const HEADSHOT_PLACEHOLDER = `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8e8e0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b8b7a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="100" fill="url(#bgGradient)"/>
+  <circle cx="100" cy="80" r="30" fill="#6a6a65" opacity="0.6"/>
+  <path d="M 60 140 Q 60 120 80 120 L 120 120 Q 140 120 140 140 L 140 180 Q 140 190 130 190 L 70 190 Q 60 190 60 180 Z" fill="#6a6a65" opacity="0.6"/>
+</svg>`;
 
