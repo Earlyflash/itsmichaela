@@ -21,6 +21,12 @@ export default {
       });
     }
     
+    // Serve headshot image (if it exists, otherwise 404 will trigger placeholder)
+    if (url.pathname === '/headshot.jpg') {
+      // Return 404 to trigger placeholder - replace this with actual image serving when image is added
+      return new Response('Not Found', { status: 404 });
+    }
+    
     // 404 for other paths
     return new Response('Not Found', { status: 404 });
   },
@@ -52,6 +58,10 @@ const HTML = `<!DOCTYPE html>
     <main>
         <section id="hero" class="hero">
             <div class="container">
+                <div class="headshot-container">
+                    <div class="headshot-placeholder"></div>
+                    <img src="/headshot.jpg" alt="Michaela" class="headshot" onerror="this.style.display='none';">
+                </div>
                 <h2 class="hero-title">Comedian & Comedy Writer</h2>
                 <p class="hero-subtitle">Making people laugh, one joke at a time</p>
             </div>
@@ -177,6 +187,56 @@ header {
     background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
 }
 
+.headshot-container {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.headshot-container {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+}
+
+.headshot {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: block;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+}
+
+.headshot-placeholder {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-accent) 100%);
+    border: 3px solid var(--color-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.headshot-placeholder::after {
+    content: '📷';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    opacity: 0.5;
+}
+
 .hero-title {
     font-size: 3rem;
     font-weight: 300;
@@ -261,6 +321,16 @@ footer p {
 
     .hero {
         padding: 4rem var(--spacing);
+    }
+
+    .headshot,
+    .headshot-placeholder {
+        width: 150px;
+        height: 150px;
+    }
+
+    .headshot-placeholder::after {
+        font-size: 2.5rem;
     }
 
     .hero-title {
