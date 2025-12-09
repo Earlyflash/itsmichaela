@@ -12,7 +12,9 @@ export default {
     
     // Serve the main HTML page
     if (url.pathname === '/' || url.pathname === '/index.html') {
-      return new Response(HTML, {
+      const currentYear = new Date().getFullYear();
+      const html = getHTML(currentYear);
+      return new Response(html, {
         headers: {
           'Content-Type': 'text/html;charset=UTF-8',
         },
@@ -57,9 +59,8 @@ export default {
   },
 };
 
-const CURRENT_YEAR = new Date().getFullYear();
-
-const HTML = `<!DOCTYPE html>
+function getHTML(currentYear) {
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -133,11 +134,12 @@ ${contactContent}
 
     <footer>
         <div class="container">
-            <p>&copy; ${CURRENT_YEAR} Michaela. All rights reserved.</p>
+            <p>&copy; ${currentYear} Michaela. All rights reserved.</p>
         </div>
     </footer>
 </body>
 </html>`;
+}
 
 const HEADSHOT_PLACEHOLDER = `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
   <defs>
