@@ -21,7 +21,7 @@ npm run deploy
 
 ## Configuration
 
-The site is configured in `wrangler.toml`. To deploy to `itsmichaela.com`, make sure your Cloudflare account has the domain configured and update the worker route accordingly.
+The site is configured in `wrangler.toml` with routes for both `itsmichaela.com` and `www.itsmichaela.com`. Make sure your Cloudflare account has the domain configured. The worker will serve both domains without any 403 errors.
 
 ## Features
 
