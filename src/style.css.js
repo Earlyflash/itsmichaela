@@ -18,10 +18,13 @@ export const CSS = `/* Reset and base styles */
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: var(--color-text);
     background-color: var(--color-bg);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -50,9 +53,9 @@ header {
 
 .logo {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-text);
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
 }
 
 .nav-links {
@@ -129,7 +132,7 @@ header {
     font-weight: 300;
     color: var(--color-text);
     margin-bottom: 1rem;
-    letter-spacing: -1px;
+    letter-spacing: -0.5px;
 }
 
 .hero-subtitle {
