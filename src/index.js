@@ -1,9 +1,8 @@
 // Cloudflare Worker to serve the website
 import { CSS } from './style.css.js';
-import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
 
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env) {
     const url = new URL(request.url);
     
     // Serve the main HTML page
@@ -28,23 +27,9 @@ export default {
     const staticExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.ico', '.pdf'];
     const isStaticAsset = staticExtensions.some(ext => url.pathname.toLowerCase().endsWith(ext));
     
-    if (isStaticAsset) {
-      // Use Workers Sites asset handler to serve static files from public/
-      try {
-        return await getAssetFromKV(
-          {
-            request,
-            waitUntil: ctx.waitUntil.bind(ctx),
-          },
-          {
-            ASSET_NAMESPACE: env.__STATIC_CONTENT,
-            ASSET_MANIFEST: env.__STATIC_CONTENT_MANIFEST,
-          }
-        );
-      } catch (e) {
-        // If asset not found, return 404
-        return new Response('Not Found', { status: 404 });
-      }
+    if (isStaticAsset && env.ASSETS) {
+      // Use the ASSETS binding to serve static files from public/
+      return env.ASSETS.fetch(request);
     }
     
     // 404 for other unknown routes
